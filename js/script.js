@@ -20,7 +20,7 @@ function getComputerChoice() {
             computerChoice = "scissors"
             break;
         default:
-            alert.log("computerChoice is not understood")
+            console.log("computerChoice is not understood")
             break;
     }
     return computerChoice
@@ -76,10 +76,14 @@ function playRound(humanChoice, computerChoice) {
     console.log("Score : " + humanScore + " - " + computerScore)
 }
 
+function playGame(numberTimes) {
+    for (let index = 1; index <= numberTimes; index++) {
+        computerChoice = getComputerChoice()
+        humanChoice = getHumanChoice()
+        playRound(humanChoice, computerChoice)
+    }
+}
+
+playGame(5)
 
 
-
-computerChoice = getComputerChoice()
-humanChoice = getHumanChoice()
-
-playRound(humanChoice, computerChoice)
