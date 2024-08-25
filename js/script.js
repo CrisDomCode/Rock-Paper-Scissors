@@ -1,4 +1,7 @@
 let computerChoice
+let computerScore
+let humanChoice
+let humanScore
 
 function generateRandomNumber(max) {
     return Math.floor(Math.random() * max) + 1;
@@ -23,6 +26,10 @@ function getComputerChoice() {
     return computerChoice
 }
 
+function getHumanChoice() {
+    humanChoice = prompt("What do you want : Rock, Paper, Scissors ?", "Rock");
+    humanChoice = humanChoice.toLowerCase();
+    console.log(humanChoice)
+}
 
-
-console.log(getComputerChoice())
+getHumanChoice()
