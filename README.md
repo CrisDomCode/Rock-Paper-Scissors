@@ -40,7 +40,7 @@ Here are some potential optimizations I can implement for improved performance a
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/rock-paper-scissors.git
-   Open the index.html file in your browser to start playing.
+2. Open the index.html file in your browser to start playing.
 
 ## Usage
 
