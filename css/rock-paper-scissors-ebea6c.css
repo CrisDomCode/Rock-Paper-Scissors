@@ -73,12 +73,6 @@ body {
   line-height: 50px;
 }
 
-.wrapper {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
 .close-overlay {
   z-index: 9;
   opacity: .25;
@@ -102,64 +96,6 @@ body {
   position: absolute;
 }
 
-.price {
-  padding-left: 6px;
-  font-size: 32px;
-  font-weight: 400;
-}
-
-.upgrade-text {
-  color: #000;
-  margin-bottom: 40px;
-  margin-left: 20px;
-  margin-right: 20px;
-  font-size: 16px;
-}
-
-.upgrade-row {
-  text-align: left;
-  justify-content: space-between;
-  width: 100%;
-  display: flex;
-}
-
-.pricing-box {
-  box-shadow: none;
-  background-color: #fff;
-  border: 1px solid #0000001a;
-  border-radius: 8px;
-  width: 48%;
-  padding-bottom: 30px;
-  transition: transform .2s ease-out, box-shadow .2s;
-  overflow: hidden;
-}
-
-.feature-item.not-available {
-  opacity: .5;
-  filter: grayscale();
-}
-
-.pricing-column-contain {
-  padding-left: 10%;
-  padding-right: 10%;
-}
-
-.pricing-column-contain.top-price-contain {
-  text-align: center;
-  background-color: #00000008;
-  padding-top: 17px;
-  padding-bottom: 15px;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.pricing-column-contain.top-price-contain.green-price-contain {
-  color: #1ab478;
-  background-color: #28d8931a;
-  justify-content: center;
-  display: flex;
-}
-
 .rules-accent {
   background-color: #00a22b;
   height: 10px;
@@ -178,41 +114,12 @@ body {
   overflow: auto;
 }
 
-.price-text {
-  color: #919496;
-  margin-bottom: 15px;
-  padding-left: 6px;
-  font-size: 12px;
-}
-
-.page-wrapper {
-  width: 100%;
-  overflow: hidden;
-}
-
-.price-duration {
-  padding-left: 5px;
-  font-size: 16px;
-  font-weight: 500;
-}
-
 .container-additionnal-buttons {
   grid-column-gap: 20px;
   grid-row-gap: 20px;
   display: flex;
   position: absolute;
-  inset: auto 50px 50px auto;
-}
-
-.discount-label {
-  color: #fff;
-  background-color: #28d893;
-  border-radius: 5px;
-  margin-left: 10px;
-  padding-top: 1px;
-  padding-left: 10px;
-  padding-right: 10px;
-  font-size: 12px;
+  inset: auto 30px 30px auto;
 }
 
 .rules-container {
@@ -236,20 +143,6 @@ body {
   overflow: hidden;
 }
 
-.feature-text {
-  padding-left: 15px;
-  display: inline-block;
-}
-
-.feature-wrapper {
-  border-bottom: 1px solid #d9dadc;
-  margin-bottom: 25px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-size: 15px;
-  line-height: 32px;
-}
-
 .small-button {
   color: #fff;
   text-align: center;
@@ -271,24 +164,8 @@ body {
   box-shadow: 0 10px 20px -5px #1810635c;
 }
 
-.small-button.full-upgrade-button {
-  display: block;
-}
-
-.small-button.full-upgrade-button.primary-upgrade-button {
-  background-color: #28d893;
-  box-shadow: 0 20px 30px -10px #1810632e;
-}
-
-.small-button.full-upgrade-button.primary-upgrade-button:hover {
-  background-color: #1cb176;
-  box-shadow: 0 10px 10px -5px #1810632e;
-}
-
 .body {
-  background-image: radial-gradient(circle at 50% 0, #1f3757, #131537), linear-gradient(#ffffff80, #ffffff80), url('../images/Desktop---Step-1.jpg');
-  background-position: 0 0, 0 0, 50% 0;
-  background-size: auto, auto, auto;
+  background-image: radial-gradient(circle at 50% 0, #1f3757, #131537);
   line-height: 1.5em;
 }
 
@@ -343,16 +220,6 @@ body {
   transform: scale(1.2);
 }
 
-.circle-cta.yellow {
-  background-color: #eb9f0e;
-  box-shadow: inset 0 -10px #c76c1b;
-}
-
-.circle-cta.red {
-  background-color: #db2e4d;
-  box-shadow: inset 0 -10px #9d1634;
-}
-
 .circle-cta.scissors {
   background-color: #eb9f0e;
   box-shadow: inset 0 -10px #c76c1b;
@@ -363,10 +230,6 @@ body {
   box-shadow: inset 0 -10px #9d1634;
 }
 
-.circle-cta.choice {
-  transform: scale(1.3);
-}
-
 .circle-cta.big-circle {
   width: 238px;
   height: 252px;
@@ -374,6 +237,10 @@ body {
 
 .circle-cta.big-circle:hover {
   transform: none;
+}
+
+.circle-cta.big-circle.win {
+  box-shadow: 0 0 0 180px #ffffff08, 0 0 0 120px #ffffff08, 0 0 0 60px #ffffff08, inset 0 -10px #2a45c2;
 }
 
 .white-circle {
@@ -404,11 +271,6 @@ body {
   height: 182px;
 }
 
-.div-block {
-  width: 240px;
-  height: 252px;
-}
-
 .container-choice {
   grid-column-gap: 50px;
   grid-row-gap: 50px;
@@ -428,6 +290,7 @@ body {
   border-radius: 50%;
   width: 225px;
   height: 225px;
+  margin-top: 10px;
   display: none;
 }
 
@@ -436,7 +299,7 @@ body {
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  display: none;
+  display: flex;
 }
 
 .play-again-button {
@@ -465,48 +328,89 @@ body {
   line-height: 61px;
 }
 
+.text-you-picked {
+  text-align: center;
+}
+
 @media screen and (max-width: 991px) {
   .modal-scroll {
     padding-top: 50px;
     padding-left: 5%;
     padding-right: 5%;
   }
+
+  .body {
+    background-image: radial-gradient(circle at 50% 0, #1f3757, #131537);
+  }
+
+  .container-game.comparison {
+    grid-column-gap: 35px;
+    grid-row-gap: 35px;
+  }
+
+  .circle-cta.big-circle {
+    width: 190px;
+    height: 202px;
+  }
+
+  .circle-cta.big-circle.win {
+    box-shadow: 0 0 0 120px #ffffff08, 0 0 0 80px #ffffff08, 0 0 0 40px #ffffff08, inset 0 -10px #2a45c2;
+  }
+
+  .white-circle.big-circle {
+    width: 146px;
+    height: 146px;
+  }
+
+  .play-again-button {
+    width: 175px;
+  }
 }
 
 @media screen and (max-width: 767px) {
+  .container-main {
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .container-gameprez {
+    max-width: 400px;
+    height: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .text-gameprez {
+    width: 150px;
+    font-size: 30px;
+    line-height: 25px;
+  }
+
+  .score-block {
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 92px;
+  }
+
+  .score-text {
+    margin-bottom: 0;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .score-number {
+    font-size: 55px;
+    line-height: 45px;
+  }
+
   .rules-header {
     font-size: 30px;
   }
 
   .modal-scroll {
     overflow: auto;
-  }
-
-  .price {
-    font-size: 26px;
-  }
-
-  .upgrade-text {
-    margin-bottom: 30px;
-    font-size: 14px;
-  }
-
-  .upgrade-row {
-    width: 100%;
-  }
-
-  .pricing-box {
-    width: 49%;
-  }
-
-  .pricing-column-contain.top-price-contain {
-    padding: 12px 5% 11px;
-    font-size: 13px;
-  }
-
-  .price-text {
-    font-size: 11px;
-    line-height: 1.5em;
   }
 
   .rules-container {
@@ -516,21 +420,126 @@ body {
     padding-left: 7%;
     padding-right: 7%;
   }
+
+  .body {
+    background-image: radial-gradient(circle at 50% 0, #1f3757, #131537);
+  }
+
+  .container-game {
+    background-position: 50% 200%;
+  }
+
+  .container-game.comparison {
+    grid-column-gap: 55px;
+    grid-row-gap: 55px;
+    flex-flow: wrap;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .container-game.choosing {
+    max-width: 560px;
+  }
+
+  .circle-cta {
+    width: 130px;
+    height: 133px;
+    padding-bottom: 8px;
+    box-shadow: inset 0 -7px #2a45c2;
+  }
+
+  .circle-cta.scissors {
+    box-shadow: inset 0 -7px #c76c1b;
+  }
+
+  .circle-cta.paper {
+    box-shadow: inset 0 -7px #9d1634;
+  }
+
+  .circle-cta.big-circle {
+    width: 170px;
+    height: 170px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .circle-cta.big-circle.win {
+    box-shadow: 0 0 0 90px #ffffff08, 0 0 0 60px #ffffff08, 0 0 0 30px #ffffff08, inset 0 -10px #2a45c2;
+  }
+
+  .white-circle {
+    background-size: auto 50px;
+    width: 100px;
+    height: 100px;
+    box-shadow: inset 0 6px #d8ddf1;
+  }
+
+  .white-circle.big-circle {
+    width: 130px;
+    height: 127px;
+  }
+
+  .container-choice {
+    grid-column-gap: 36px;
+    grid-row-gap: 36px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .container-annouce {
+    order: 1;
+  }
+
+  .text-you-picked {
+    order: 1;
+    font-size: 20px;
+    line-height: 20px;
+  }
 }
 
 @media screen and (max-width: 479px) {
-  .upgrade-text {
-    margin-bottom: 25px;
+  .container-main {
+    min-width: 320px;
+    padding-top: 20px;
+    padding-left: 0;
+    padding-right: 0;
   }
 
-  .upgrade-row {
-    flex-direction: column;
+  .container-gameprez {
+    padding: 10px 15px 10px 20px;
   }
 
-  .pricing-box {
+  .text-gameprez {
+    width: 80px;
+    font-size: 20px;
+    line-height: 15px;
+  }
+
+  .score-block {
+    height: 67px;
+  }
+
+  .score-text {
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  .score-number {
+    font-size: 35px;
+    line-height: 35px;
+  }
+
+  .container-additionnal-buttons {
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    margin-bottom: 50px;
-    display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: absolute;
+    bottom: 10px;
+    right: auto;
   }
 
   .rules-container {
@@ -538,6 +547,70 @@ body {
     padding-bottom: 0;
     padding-left: 5%;
     padding-right: 5%;
+  }
+
+  .small-button {
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  .body {
+    background-image: radial-gradient(circle at 50% 0, #1f3757, #131537);
+  }
+
+  .container-game.comparison {
+    grid-column-gap: 23px;
+    grid-row-gap: 23px;
+  }
+
+  .container-game.choosing {
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+    background-position: 50% 80%;
+    background-size: 220px;
+    flex-flow: wrap;
+  }
+
+  .circle-cta {
+    width: 105px;
+    height: 107px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 7px;
+    box-shadow: inset 0 -5px #2a45c2;
+  }
+
+  .circle-cta:hover {
+    transform: none;
+  }
+
+  .circle-cta.big-circle {
+    width: 119px;
+    height: 126px;
+  }
+
+  .white-circle {
+    background-size: auto 40px;
+    width: 81px;
+    height: 81px;
+    box-shadow: inset 0 5px #d8ddf1;
+  }
+
+  .white-circle.big-circle {
+    width: 91px;
+    height: 91px;
+  }
+
+  .text-announce {
+    font-size: 40px;
+    line-height: 45px;
+  }
+
+  .text-you-picked {
+    font-size: 12px;
+    line-height: 14px;
   }
 }
 
