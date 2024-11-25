@@ -1,80 +1,112 @@
+
 // CONSTANTS
-        const choices               = ["rock", "paper", "scissors"];
-        const rules                 = {
-                                        rock: { rock: "Draw", paper: "You lose", scissors: "You win" },
-                                        paper: { rock: "You win", paper: "Draw", scissors: "You lose" },
-                                        scissors: { rock: "You lose", paper: "You win", scissors: "Draw" }
-                                    };
-        let computerScore           = 0;
-        let humanScore              = 0;
+const choices                                 = ["rock", "paper", "scissors"];
+const rules = {
+    rock                                      : { rock: "Draw", paper: "You lose", scissors: "You win" },
+    paper                                     : { rock: "You win", paper: "Draw", scissors: "You lose" },
+    scissors                                  : { rock: "You lose", paper: "You win" }
+};
+let computerScore                             = 0;
+let humanScore                                = 0;
 
 // SELECTIONS
-    const rockButton                = document.querySelector('.circle-cta.rock');
-    const scissorsButton            = document.querySelector('.circle-cta.scissors');
-    const paperButton               = document.querySelector('.circle-cta.paper');
-    const humanScoreSpan            = document.querySelector('#humanScore');
-    const computerScoreSpan         = document.querySelector('#computerScore');
-    const choosingContainer         = document.querySelector('.container-game.choosing');
-    const comparisonContainer       = document.querySelector('.container-game.comparison');
-    const computerChoiceDisplay     = document.querySelector('.computer-choice-display');
-    const loadingDiv                = document.querySelector('.loading-div');
-
+const rockButton                              = document.querySelector('.circle-cta.rock');
+const scissorsButton                          = document.querySelector('.circle-cta.scissors');
+const paperButton                             = document.querySelector('.circle-cta.paper');
+const humanScoreSpan                          = document.querySelector('#humanScore');
+const computerScoreSpan                       = document.querySelector('#computerScore');
+const choosingContainer                       = document.querySelector('.container-game.choosing');
+const comparisonContainer                     = document.querySelector('.container-game.comparison');
+const computerChoiceDisplay                   = document.querySelector('.computer-choice-display');
+const loadingDiv                              = document.querySelector('.loading-div');
+const announceContainer                       = document.querySelector('.container-annouce');
+const playAgainButton                         = document.querySelector('.play-again-button');
+const resetButton                             = document.querySelector('.small-button[href="#reset"]');
 
 // FUNCTIONS
-    // Get a random computer choice
-        function getComputerChoice() {
-            // Selects a random index from the choices array
-            return choices[Math.floor(Math.random() * choices.length)];
-        }
-    // Update graphics - Step 1, 2, 3
-        function updateGraphics(humanSelection, computerSelection) {
-            // Step 1 : Hiding ChoosingContainer, Showing ComparisonContainer
-                choosingContainer.style.display         = 'none'
-                comparisonContainer.style.display       = 'flex'
+function getComputerChoice() {
+    return choices[Math.floor(Math.random() * choices.length)];
+}
 
-            // Step 2: Add loading animation for 3 seconds
-                loadingDiv.classList.add('pulsing');
-                setTimeout(() => {
-                    loadingDiv.classList.remove('pulsing'); // Remove animation after 3 seconds
-                    
-                    loadingDiv.style.display = 'none';
-                    computerChoiceDisplay.style.display = 'flex';
-                    computerChoiceDisplay.innerHTML = `
-                        <div class="circle-cta ${computerSelection} big-circle w-inline-block">
-                            <div class="white-circle ${computerSelection} big-circle"></div>
-                        </div>
-                    `;
+function updateGraphics(humanSelection, computerSelection) {
+    choosingContainer.style.display = 'none';
+    comparisonContainer.style.display = 'flex';
 
-                    // Wait 1 second, then highlight the winner
-                    setTimeout(() => {
-                        const result = rules[humanSelection][computerSelection];
-                        if (result === "You win") {
-                            document.querySelector('.big-circle').classList.add('win'); // Highlight human choice
-                        } else if (result === "You lose") {
-                            computerChoiceDisplay.querySelector('.circle-cta').classList.add('win'); // Highlight computer choice
-                        }
-                    }, 1000); // 1 second delay
-                }, 3000); // 3 seconds delay for loading animation
+    // Show the user's choice
+    const userChoiceDisplay = document.querySelector('.container-choice .circle-cta.big-circle.w-inline-block');
+    if (userChoiceDisplay) {
+        userChoiceDisplay.outerHTML = `
+            <a href="#" class="circle-cta ${humanSelection} big-circle w-inline-block">
+                <div class="white-circle ${humanSelection} big-circle"></div>
+            </a>
+        `;
     }
-        
-    // Update scores and display the result
-        function updateScoreAndMessage(humanSelection, computerSelection) {
-            
-            const outcome = rules[humanSelection][computerSelection];
-            console.log(outcome)
-            if (outcome === "You win") humanScore++;
-            if (outcome === "You lose") computerScore++;
-            humanScoreSpan.innerText = humanScore;
-            computerScoreSpan.innerText = computerScore;
+
+    // Start loading animation
+    loadingDiv.classList.add('pulsing');
+    setTimeout(() => {
+        // End loading animation
+        loadingDiv.classList.remove('pulsing');
+        loadingDiv.style.display = 'none';
+        computerChoiceDisplay.style.display = 'flex';
+        computerChoiceDisplay.innerHTML = `
+            <div class="circle-cta ${computerSelection} big-circle w-inline-block">
+                <div class="white-circle ${computerSelection} big-circle"></div>
+            </div>
+        `;
+
+        // Highlight winner and display result
+        const result = rules[humanSelection][computerSelection];
+        if (result === "You win") {
+            document.querySelector('.container-choice .circle-cta').classList.add('win');
+            humanScore++;
+        } else if (result === "You lose") {
+            computerChoiceDisplay.querySelector('.circle-cta').classList.add('win');
+            computerScore++;
         }
-    // Play the Round
-        function playRound(humanSelection) {
-            const computerSelection = getComputerChoice();
-            updateGraphics(humanSelection, computerSelection)
-            updateScoreAndMessage(humanSelection, computerSelection);
-        }
+
+        // Update scores
+        humanScoreSpan.innerText = humanScore;
+        computerScoreSpan.innerText = computerScore;
+
+        // Display the announce container with smooth animation
+        setTimeout(() => {
+            announceContainer.classList.add('show'); // Add the class to trigger CSS transition
+            announceContainer.style.display = 'flex';
+            document.querySelector('.text-announce').innerText = result;
+        }, 0); // No delay, appears immediately after scores update
+
+    }, 3000); // Delay for loading animation
+}
+
+// Reset only the interface (used by Play Again)
+function resetInterface() {
+    choosingContainer.style.display           = 'flex';
+    comparisonContainer.style.display         = 'none';
+    announceContainer.style.display           = 'none';
+    announceContainer.classList.remove('show'); // Remove animation class
+    loadingDiv.style.display                  = 'flex';
+    computerChoiceDisplay.style.display       = 'none';
+    document.querySelectorAll('.circle-cta.win').forEach(el => el.classList.remove('win'));
+}
+
+// Reset scores and the interface (used by Reset Button)
+function resetGame() {
+    resetInterface();
+    humanScore                                = 0;
+    computerScore                             = 0;
+    humanScoreSpan.innerText                  = humanScore;
+    computerScoreSpan.innerText               = computerScore;
+}
+
+function playRound(humanSelection) {
+    const computerSelection                   = getComputerChoice();
+    updateGraphics(humanSelection, computerSelection);
+}
 
 // EVENT LISTENERS
 rockButton.addEventListener("click", () => playRound("rock"));
 scissorsButton.addEventListener("click", () => playRound("scissors"));
 paperButton.addEventListener("click", () => playRound("paper"));
+playAgainButton.addEventListener("click", resetInterface); // Resets only the interface
+resetButton.addEventListener("click", resetGame); // Resets scores and interface
