@@ -24,12 +24,33 @@ const playAgainButton                         = document.querySelector('.play-ag
 const resetButton                             = document.querySelector('.small-button[href="#reset"]');
 
 // FUNCTIONS
+
+// Save scores to localStorage
+function saveScores() {
+    localStorage.setItem('humanScore', humanScore);
+    localStorage.setItem('computerScore', computerScore);
+}
+
+// Load scores from localStorage
+function loadScores() {
+    const savedHumanScore       = localStorage.getItem('humanScore');
+    const savedComputerScore    = localStorage.getItem('computerScore');
+
+    // If scores exist, update them; otherwise, initialize to 0
+    humanScore                  = savedHumanScore ? parseInt(savedHumanScore, 10) : 0;
+    computerScore               = savedComputerScore ? parseInt(savedComputerScore, 10) : 0;
+
+    // Update the score display
+    humanScoreSpan.innerText    = humanScore;
+    computerScoreSpan.innerText = computerScore;
+}
+
 function getComputerChoice() {
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
 function updateGraphics(humanSelection, computerSelection) {
-    choosingContainer.style.display = 'none';
+    choosingContainer.style.display   = 'none';
     comparisonContainer.style.display = 'flex';
 
     // Show the user's choice
@@ -47,16 +68,16 @@ function updateGraphics(humanSelection, computerSelection) {
     setTimeout(() => {
         // End loading animation
         loadingDiv.classList.remove('pulsing');
-        loadingDiv.style.display = 'none';
-        computerChoiceDisplay.style.display = 'flex';
-        computerChoiceDisplay.innerHTML = `
+        loadingDiv.style.display              = 'none';
+        computerChoiceDisplay.style.display   = 'flex';
+        computerChoiceDisplay.innerHTML       = `
             <div class="circle-cta ${computerSelection} big-circle w-inline-block">
                 <div class="white-circle ${computerSelection} big-circle"></div>
             </div>
         `;
 
         // Highlight winner and display result
-        const result = rules[humanSelection][computerSelection];
+        const result                          = rules[humanSelection][computerSelection];
         if (result === "You win") {
             document.querySelector('.container-choice .circle-cta').classList.add('win');
             humanScore++;
@@ -66,18 +87,25 @@ function updateGraphics(humanSelection, computerSelection) {
         }
 
         // Update scores
-        humanScoreSpan.innerText = humanScore;
-        computerScoreSpan.innerText = computerScore;
+        humanScoreSpan.innerText              = humanScore;
+        computerScoreSpan.innerText           = computerScore;
 
         // Display the announce container with smooth animation
         setTimeout(() => {
             announceContainer.classList.add('show'); // Add the class to trigger CSS transition
-            announceContainer.style.display = 'flex';
-            document.querySelector('.text-announce').innerText = result;
+            announceContainer.style.display   = 'flex';
+
+            // Fix undefined issue for "Draw"
+            if (result === "Draw") {
+                document.querySelector('.text-announce').innerText = "It's a draw!";
+            } else {
+                document.querySelector('.text-announce').innerText = result;
+            }
         }, 0); // No delay, appears immediately after scores update
 
     }, 3000); // Delay for loading animation
 }
+
 
 // Reset only the interface (used by Play Again)
 function resetInterface() {
@@ -93,10 +121,14 @@ function resetInterface() {
 // Reset scores and the interface (used by Reset Button)
 function resetGame() {
     resetInterface();
-    humanScore                                = 0;
-    computerScore                             = 0;
-    humanScoreSpan.innerText                  = humanScore;
-    computerScoreSpan.innerText               = computerScore;
+    humanScore = 0;
+    computerScore = 0;
+    humanScoreSpan.innerText = humanScore;
+    computerScoreSpan.innerText = computerScore;
+
+    // Clear scores from localStorage
+    localStorage.removeItem('humanScore');
+    localStorage.removeItem('computerScore');
 }
 
 function playRound(humanSelection) {
@@ -110,3 +142,7 @@ scissorsButton.addEventListener("click", () => playRound("scissors"));
 paperButton.addEventListener("click", () => playRound("paper"));
 playAgainButton.addEventListener("click", resetInterface); // Resets only the interface
 resetButton.addEventListener("click", resetGame); // Resets scores and interface
+
+
+// Load scores when the page loads
+window.addEventListener('DOMContentLoaded', loadScores);
